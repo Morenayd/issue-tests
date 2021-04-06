@@ -5,7 +5,7 @@ var { Builder, By } = require("selenium-webdriver");
 
 
 
-describe("Testing HtmlForms", function() {
+describe("Testing Navigation on HtmlForms", function() {
     this.timeout(3 * 1000 * 60);
     var driver = new webdriver.Builder().forBrowser('chrome').build()
 
@@ -15,9 +15,9 @@ describe("Testing HtmlForms", function() {
         driver.get(file_url).then(done)
     })
 
-    after(function() {
-        driver.quit()
-    })
+        after(function() {
+            driver.quit()
+        })
 
     it("test case: check if Contact Us link is present",  async () => {
         const element = await driver.findElement(By.css("a[href='../htmlForms/contact.html']"));
@@ -31,15 +31,31 @@ describe("Testing HtmlForms", function() {
         assert.include(link, "Product Page", `Ensure link is presnt` )
     })
 
-    it("test case: Check if clicking of link navigates user to the required page", async () => {
-        const element = await driver.findElement(By.css("a[href='../htmlForms/contact.html']"))
-
+    it("test case: Check if clicking the Contact link navigates user to the Product Page", async () => {
+        const element = await driver.findElement(By.css("a[href='../introductionToHtml/e-commerceStore.Html']"));
         if (element.click()) {
-            await driver.navigate().to("../htmlForms/contact.html")
-            const actualTitle = await driver.getTitle()
-            const expectedTitle = 'Contact Form'
-            assert.notEqual(actualTitle, expectedTitle)
+            console.log('Yeah, it works')
+            const navigator =  driver.navigate().to('../introductionToHtml/e-commerceStore.Html');
+            if(navigator){
+                const actualTitle = await driver.getTitle()
+                const expectedTitle = 'Smart Bookstore'
+                assert(actualTitle !== expectedTitle, `Expects ${actualTitle} to navigate to ${expectedTitle}`)
+            }
         }   
-
     })
+
+    it("test case: It should navigate to Contact form page", async () => {
+        const element = await driver.findElement(By.css("a[href='../htmlForms/contact.html']"))
+        if(element.click()){
+            const navigator = driver.navigate().to('../htmlForms/contact.html');
+            if(navigator) {
+                const actualTitle = await driver.getTitle()
+                const expectedTitle = 'Contact Form'
+                assert(actualTitle !== expectedTitle, `Exxpects ${actualTitle} to navigate to ${expectedTitle}`)
+            }
+        }
+    })
+
+    
+
 })
