@@ -8,3 +8,4 @@ This repository contains tests written for tasks or issues created on any of the
 
 ## Contributors
 - Folashade Daniel - [@beccadaniel](github.com/beccadaniel)
+- Jesutofunmi Adewole - [@morenayd](github.com/morenayd0)
